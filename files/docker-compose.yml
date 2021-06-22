@@ -3,6 +3,8 @@ services:
   rabbitmq:
     build:
       context: rabbitmq/
+      args:
+        RABBITMQ_VERSION: $RABBITMQ_VERSION
     container_name: canren-rabbitmq
     ports:
       - 15672:15672

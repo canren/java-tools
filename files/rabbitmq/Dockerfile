@@ -1,4 +1,6 @@
-FROM rabbitmq:3.8.17-management
+ARG RABBITMQ_VERSION
+
+FROM rabbitmq:$RABBITMQ_VERSION
 MAINTAINER bestsxf@gmail.com
 
 # 设置时区
