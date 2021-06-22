@@ -5,7 +5,7 @@ services:
       context: rabbitmq/
       args:
         RABBITMQ_VERSION: $RABBITMQ_VERSION
-    container_name: canren-rabbitmq
+    container_name: tools-rabbitmq
     ports:
       - 15672:15672
       - 5672:5672
@@ -18,7 +18,27 @@ services:
       RABBITMQ_DEFAULT_PASS: admin
     restart: always
 
+  mysql:
+    build:
+      context: mysql/
+      args:
+        MYSQL_VERSION: $MYSQL_VERSION
+    container_name: tools-mysql
+    ports:
+      - 3306:3306
+    networks:
+      - java—tools
+    volumes:
+      - ./mysql/my.cnf:/etc/my.cnf:cached
+      - ../data/mysql:/var/lib/mysql
+      - ../logs/mysql:/var/lib/mysql-logs
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    restart: always
+    command: "--character-set-server=utf8"
+
 networks:
   java—tools:
     driver: bridge
-  
