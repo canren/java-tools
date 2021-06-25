@@ -69,6 +69,19 @@ services:
       MODE: standalone
     restart: always
 
+  zookeeper: # 访问地址 http://localhost:端口号/nacos 帐号密码均为nacos
+    build:
+      context: zookeeper/
+      args:
+        ZOOKEEPER_VERSION: $ZOOKEEPER_VERSION
+    container_name: tools-zookeeper
+    privileged: true
+    ports:
+      - 2181:2181
+    networks:
+      - java—tools
+    restart: always
+
 networks:
   java—tools:
     driver: bridge
